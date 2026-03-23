@@ -1,5 +1,5 @@
 html {
-  height: 5000px;
+  height: 1100px;
 }
 
 body {
@@ -8,27 +8,12 @@ body {
   min-height: 100%;
   background: linear-gradient(
     to bottom,
-    #1854cc 0%,
-    #00dfee 9%,
-    #66f8ff 13%,
-    #da7c22 20%,
-    #da7c22 100%
+    #DD2D76 0%,
+    #EEB296EE 10%,
+    #FFFFFF 40%,
+    #DD2D76 100%
   );
-  background-attachment: scroll;
+  background-attachment: fixed;
   background-repeat: no-repeat;
 }
-.glow-circle {
-  width: 80px;
-  height: 80px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 15%;
-  left: 20%;
-  transition: all 0.7s ease;
-  cursor: pointer;
-  opacity: 90%;
-}
-
-.glow-circle:hover {
-  box-shadow: 0 0 40px 15px rgba(255, 255, 255, 0.7);}
+.
