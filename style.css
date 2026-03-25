@@ -1,5 +1,8 @@
 html {
   height: 1100px;
+  z-index: -9000;
+  font-family: 'Humane';
+  src: url('fonts/1589_Humane_BordeauxW00-It.ttf') format('truetype');
 }
 
 body {
@@ -8,12 +11,89 @@ body {
   min-height: 100%;
   background: linear-gradient(
     to bottom,
-    #DD2D76 0%,
-    #EEB296EE 10%,
-    #FFFFFF 40%,
-    #DD2D76 100%
+    #FFBCE4 0%,
+    #FFFFFF 20%,
+    #FFFFFF 75%,
+    #FFBCE4 100%
   );
   background-attachment: fixed;
   background-repeat: no-repeat;
+  .scroll-container {
+  display: flex;
+  align-items: flex-start; 
+  padding: 0 10%;
 }
-.
+
+.static-part {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 140px;
+  font-weight: 120px;
+  position: sticky;
+  margin-left: 240px;
+  top: 45vh; /* Giữ số 00 ở vị trí 30% màn hình từ trên xuống */
+  line-height: 1;
+  color:#8c8b8b;
+}
+
+.dynamic-wrapper {
+  margin-left: 10px;
+}
+
+.question {
+  height: 140vh; /* Mỗi mốc thời gian chiếm 1 màn hình */
+  display: flex;
+  align-items: center;
+}
+
+.number {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 136px;
+  font-weight: 120px;
+  margin-right: 40px;
+ color:#585858
+}
+
+.content {
+  max-width: 400px;
+}
+
+/* Tùy chỉnh cho phần nội dung văn bản */
+.content h3 {
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 50;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+
+}
+
+.content p {
+  font-family: '1589_Humane_Bordeaux', sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  color: #424242;
+  line-height: 1.2;
+  width: 570px;
+  padding: 20px;
+  line-height: 1.2;
+}
+.pixel-cat-overlay {
+    position: fixed; /* Giữ chú mèo cố định trên màn hình */
+    bottom: 30px;    /* Cách đáy màn hình 30px */
+    right: 30px;     /* Cách lề phải màn hình 30px */
+
+    width: 400px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
+    height: auto;
+    
+    /* Rất quan trọng cho pixel art: giúp ảnh không bị mờ */
+    image-rendering: pixelated; 
+    
+    /* Đảm bảo chú mèo nằm trên cùng */
+    z-index: -100000; 
+    
+    /* Nếu bạn muốn mèo không cản trở việc click vào các nút bên dưới */
+    pointer-events: none; 
+}
+
+
+}
