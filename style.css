@@ -1,8 +1,18 @@
+ @font-face {
+  font-family: 'Humane';
+  src: url('fonts/1589_Humane_BordeauxW00-It.ttf') format('truetype');
+  font-weight: normal;
+}
+
+ @font-face {
+  font-family: 'Pixelify';
+  src: url('fonts/PixelifySans-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+}
+
 html {
   height: 1100px;
   z-index: -9000;
-  font-family: 'Humane';
-  src: url('fonts/1589_Humane_BordeauxW00-It.ttf') format('truetype');
 }
 
 body {
@@ -18,14 +28,16 @@ body {
   );
   background-attachment: fixed;
   background-repeat: no-repeat;
-  .scroll-container {
+}
+
+.scroll-container {
   display: flex;
   align-items: flex-start; 
   padding: 0 10%;
 }
 
 .static-part {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'Pixelify';
   font-size: 140px;
   font-weight: 120px;
   position: sticky;
@@ -46,7 +58,7 @@ body {
 }
 
 .number {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'Pixelify';
   font-size: 136px;
   font-weight: 120px;
   margin-right: 40px;
@@ -59,7 +71,7 @@ body {
 
 /* Tùy chỉnh cho phần nội dung văn bản */
 .content h3 {
-  font-family: 'Pixelify Sans', sans-serif;
+  font-family: 'Pixelify', sans-serif;
   font-weight: 50;
   font-size: 1.8rem;
   line-height: 1.2;
@@ -68,7 +80,7 @@ body {
 }
 
 .content p {
-  font-family: '1589_Humane_Bordeaux', sans-serif;
+  font-family: 'Humane', sans-serif;
   font-weight: 400;
   font-size: 28px;
   color: #424242;
@@ -81,7 +93,7 @@ body {
     position: fixed; /* Giữ chú mèo cố định trên màn hình */
     bottom: 30px;    /* Cách đáy màn hình 30px */
     right: 30px;     /* Cách lề phải màn hình 30px */
-
+    
     width: 400px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
     height: auto;
     
@@ -89,11 +101,15 @@ body {
     image-rendering: pixelated; 
     
     /* Đảm bảo chú mèo nằm trên cùng */
-    z-index: -100000; 
-    
+    z-index: -1000; 
     /* Nếu bạn muốn mèo không cản trở việc click vào các nút bên dưới */
     pointer-events: none; 
+    opacity: 50%
 }
 
-
+.corner-heart {
+    position: fixed;
+    width: 754px;
+    opacity: 0.3;
+    left: -2px
 }
