@@ -13,6 +13,7 @@
 html {
   height: 1100px;
   z-index: -9000;
+  
 }
 
 body {
@@ -41,7 +42,7 @@ body {
   font-size: 140px;
   font-weight: 120px;
   position: sticky;
-  margin-left: 240px;
+  margin-left: 235px;
   top: 45vh; /* Giữ số 00 ở vị trí 30% màn hình từ trên xuống */
   line-height: 1;
   color:#8c8b8b;
@@ -67,13 +68,14 @@ body {
 
 .content {
   max-width: 400px;
+  margin-left: 40px;
 }
 
 /* Tùy chỉnh cho phần nội dung văn bản */
-.content h3 {
+.content p.question-text {
   font-family: 'Pixelify', sans-serif;
   font-weight: 50;
-  font-size: 1.8rem;
+  font-size: 2rem;
   line-height: 1.2;
   margin-bottom: 10px;
 
@@ -94,7 +96,7 @@ body {
     bottom: 30px;    /* Cách đáy màn hình 30px */
     right: 30px;     /* Cách lề phải màn hình 30px */
     
-    width: 400px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
+    width: 300px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
     height: auto;
     
     /* Rất quan trọng cho pixel art: giúp ảnh không bị mờ */
@@ -104,12 +106,189 @@ body {
     z-index: -1000; 
     /* Nếu bạn muốn mèo không cản trở việc click vào các nút bên dưới */
     pointer-events: none; 
-    opacity: 50%
+    opacity: 70%
 }
 
 .corner-heart {
     position: fixed;
     width: 754px;
     opacity: 0.3;
-    left: -2px
+    left: -1px
+}
+.left-below-heart {
+    position: fixed;
+    width: 200px;
+    opacity: 0.3;
+    left: -1px;
+    bottom: 5px;
+}
+/* --- Đoạn code bổ sung cho Night Mode (Có Gradient Tối) --- */
+body.night-mode {
+    /* Đổi dải màu gradient thành các tông đen/xám tối */
+    background: linear-gradient(
+        to bottom,
+        #474647 0%,    /* Màu xám đậm ở đỉnh (thay cho #FFBCE4) */
+        #141414 20%,   /* Màu đen tuyền ở giữa (thay cho #FFFFFF) */
+        #141414 75%,   /* Giữ màu đen tuyền (thay cho #FFFFFF) */
+        #474647 100%   /* Màu xám đậm ở đáy (thay cho #FFBCE4) */
+    ) !important;
+    
+    background-attachment: fixed !important; /* Giữ cố định nền như cũ */
+    color: #ffa2c1 !important;              /* Chữ màu hồng */
+}
+
+/* Ép tất cả các chữ trong khung chữ nhảy sang màu hồng */
+body.night-mode p, 
+body.night-mode span, 
+body.night-mode div,
+body.night-mode .static-part {
+    color: #ffa8c5 !important;
+}
+
+/* --- HIỆU ỨNG HOVER TRÁO ĐỔI VỊ TRÍ CÂU HỎI & CÂU TRẢ LỜI --- */
+
+/* 1. Ép thẻ content thành một khung lưới duy nhất */
+.question .content {
+    display: inline-grid;
+    grid-template-areas: "overlap"; /* Tạo một vùng đè mang tên overlap */
+    width: fit;
+}
+
+/* 2. Bắt cả câu hỏi và câu trả lời phải đứng chung một chỗ */
+.question .content .question-text,
+.question .content .answer-text {
+    grid-area: overlap; /* Nằm chung trên vùng overlap */
+    margin: 0;          /* Xóa bỏ khoảng cách thừa để không bị lệch */
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Tạo hiệu ứng mượt */
+}
+
+/* --- TRẠNG THÁI MẶC ĐỊNH (Khi chưa hover) --- */
+
+/* --- HIỆU ỨNG CĂN GIỮA TUYỆT ĐỐI THEO CHIỀU CAO CÂU TRẢ LỜI --- */
+
+/* 1. Thiết lập cái hộp content thành Flexbox để căn giữa */
+.question .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Căn giữa nội dung theo chiều dọc */
+    align-items: flex-start;
+    
+    position: relative;
+    width: fit-content;
+    max-width: fit-content;
+}
+
+/* 2. Ép Câu hỏi nằm đè lên đúng tâm của Câu trả lời */
+.question .content .question-text {
+    position: absolute; /* Rút câu hỏi ra khỏi dòng chảy bình thường */
+    top: 50%;           /* Đẩy xuống giữa */
+    transform: translateY(-50%); /* Giật ngược lại nửa chiều cao để vào tâm chuẩn */
+    margin: 0;
+    
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* 3. Câu trả lời đóng vai trò làm khung sườn (Dùng để lấy chiều cao) */
+.question .content .answer-text {
+    opacity: 0;
+    visibility: hidden;
+    margin: 0;
+    
+    /* pointer-events giúp chuột đi xuyên qua câu trả lời để chạm vào câu hỏi */
+    pointer-events: none; 
+    
+    transition: opacity 0.4s ease;
+}
+
+/* --- TRẠNG THÁI KHI HOVER (Chạm vào đúng khối chữ) --- */
+
+/* Khi hover: Câu hỏi ẩn đi và nhích nhẹ lên trên */
+.question .content:hover .question-text {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-70%); /* Bay nhẹ lên trên lúc ẩn */
+}
+
+/* Khi hover: Câu trả lời hiện lên rực rỡ ở đúng vị trí khung sườn */
+.question .content:hover .answer-text {
+    opacity: 1;
+    visibility: visible;
+}
+/* --- CODE ĐỒNG HỒ ĐỘC LẬP --- */
+
+.standalone-clock {
+    /* 1. ĐỊNH VỊ: Bạn tùy ý chỉnh 2 số này để đặt đồng hồ vào góc bạn muốn */
+    position: fixed;
+    top: 20%;  
+    left: 5%;  
+
+    /* 2. KÍCH THƯỚC: Thu nhỏ hoặc phóng to vùng đốm sáng ở đây */
+    width: 300px;
+    height: 300px;
+
+    /* 3. TẠO ĐỐM SÁNG XANH LÁ (Radial Gradient) */
+    background: radial-gradient(
+        circle, 
+        rgba(100, 242, 140, 0.7) 0%,   /* Xanh lá ở tâm */
+        rgba(255, 255, 255, 0) 50%,  
+        transparent 75%                
+    );
+    border-radius: 90%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5; /* Đảm bảo nổi trên nền hạt lấp lánh nhưng dưới chữ */
+}
+
+/* --- TẠO HAI CHIẾC KIM ĐỒNG HỒ TỰ QUAY --- */
+.clock-hands {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+/* Khởi tạo trục xoay cho cả 2 kim */
+.clock-hands::before,
+.clock-hands::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform-origin: bottom center; /* Quay từ gốc chân kim */
+    border-radius: 4px;
+}
+
+/* KIM PHÚT (Màu hồng pixel, dài hơn, quay nhanh hơn) */
+.clock-hands::before {
+    width: 3px;
+    height: 70px; /* Chiều dài kim */
+    background-color: #ffc9ef;
+    box-shadow: 0 0 8px #f6eef3; /* Phát sáng neon */
+    
+    margin-left: -1.5px;
+    margin-top: -70px; /* Kéo ngược lên trên trục */
+    
+    animation: clockSpin 10s linear infinite; /* Quay hết 1 vòng trong 10 giây */
+}
+
+/* KIM GIỜ (Màu trắng, ngắn hơn, quay chậm hơn) */
+.clock-hands::after {
+    width: 4px;
+    height: 45px; /* Chiều dài kim */
+    background-color: #ffffff;
+    box-shadow: 0 0 8px #ffffff;
+    
+    margin-left: -2px;
+    margin-top: -45px;
+    
+    animation: clockSpin 60s linear infinite; /* Quay hết 1 vòng trong 60 giây */
+}
+
+/* HIỆU ỨNG XOAY TRÒN BẤT TẬN */
+@keyframes clockSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
