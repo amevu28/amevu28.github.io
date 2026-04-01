@@ -45,7 +45,7 @@ body {
   margin-left: 235px;
   top: 45vh; /* Giữ số 00 ở vị trí 30% màn hình từ trên xuống */
   line-height: 1;
-  color:#8c8b8b;
+  color:#878787;
 }
 
 .dynamic-wrapper {
@@ -96,24 +96,24 @@ body {
     bottom: 30px;    /* Cách đáy màn hình 30px */
     right: 30px;     /* Cách lề phải màn hình 30px */
     
-    width: 300px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
+    width: 230px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
     height: auto;
     
     /* Rất quan trọng cho pixel art: giúp ảnh không bị mờ */
     image-rendering: pixelated; 
-    
     /* Đảm bảo chú mèo nằm trên cùng */
-    z-index: -1000; 
+    z-index: 10000; 
     /* Nếu bạn muốn mèo không cản trở việc click vào các nút bên dưới */
     pointer-events: none; 
-    opacity: 70%
+    opacity: 100
 }
 
 .corner-heart {
     position: fixed;
     width: 754px;
     opacity: 0.3;
-    left: -1px
+    left: -1px;
+    z-index: -1000;
 }
 .left-below-heart {
     position: fixed;
@@ -121,7 +121,18 @@ body {
     opacity: 0.3;
     left: -1px;
     bottom: 5px;
+    z-index: -1000;
 }
+.right-below-heart {
+    position: fixed;
+    width: 200px;
+    opacity: 0.3;
+    right: 0px;
+    bottom: 5px;
+    z-index: -1000;
+    transform: scaleX(-1);
+}
+
 /* --- Đoạn code bổ sung cho Night Mode (Có Gradient Tối) --- */
 body.night-mode {
     /* Đổi dải màu gradient thành các tông đen/xám tối */
@@ -129,7 +140,7 @@ body.night-mode {
         to bottom,
         #474647 0%,    /* Màu xám đậm ở đỉnh (thay cho #FFBCE4) */
         #141414 20%,   /* Màu đen tuyền ở giữa (thay cho #FFFFFF) */
-        #141414 75%,   /* Giữ màu đen tuyền (thay cho #FFFFFF) */
+        #351c1c 75%,   /* Giữ màu đen tuyền (thay cho #FFFFFF) */
         #474647 100%   /* Màu xám đậm ở đáy (thay cho #FFBCE4) */
     ) !important;
     
