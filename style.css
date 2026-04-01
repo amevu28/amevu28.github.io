@@ -298,3 +298,39 @@ body {
   border: 1px solid #61ffa3;
   color: #2ecc71;
 }
+/* =========================
+   NIGHT MODE (DARK MODE)
+   ========================= */
+
+/* Dark background + light text */
+body.night-mode {
+    background: linear-gradient(
+        to bottom,
+        #1a1a1a 0%,
+        #000000 50%,
+        #1a1a1a 100%
+    );
+    color: #ffa0d9;
+}
+
+/* Text color adjustments */
+body.night-mode .content p.answer-text {
+    color: #ffa0d9;
+}
+
+body.night-mode .number {
+    color: #afafaf;
+}
+
+body.night-mode .static-part {
+    color: #666666;
+}
+
+/* Optional: glow effect */
+body.night-mode .standalone-clock {
+    background: radial-gradient(
+        circle,
+        rgba(255, 236, 253, 0.512) 0%,
+        transparent 70%
+    );
+}

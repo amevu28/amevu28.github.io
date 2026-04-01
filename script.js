@@ -1,33 +1,33 @@
-// Store the previous scroll position
+// store the previous scroll position
 let lastScrollTop = 0;
 
 // Move and flip the pixel cat based on scroll direction
 window.addEventListener('scroll', function () {
-    // Get the cat element
+    // get the cat element
     const pixelCat = document.getElementById('pixel-cat');
 
-    // Stop if the cat element is missing
+    // stop if the cat element is missing
     if (!pixelCat) return;
 
-    // Get the current vertical scroll position
+    // get the current vertical scroll position
     const currentScrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
 
-    // Calculate total scrollable height
+    // calculate total scrollable height
     const totalScrollableHeight =
         document.documentElement.scrollHeight - window.innerHeight;
 
-    // Prevent division by zero
+    // prevent division by zero
     if (totalScrollableHeight <= 0) return;
 
-    // Calculate scroll progress across the page
+    // calculate scroll progress across the page
     const scrollPercentage = currentScrollTop / totalScrollableHeight;
 
-    // Calculate how far the cat should move horizontally
+    // calculate how far the cat should move horizontally
     const maxTravelDistance = window.innerWidth - pixelCat.offsetWidth;
     const currentMoveDistance = scrollPercentage * maxTravelDistance;
 
-    // Determine cat direction based on scroll direction
+    // determine cat direction based on scroll direction
     let scaleX = 1;
 
     if (currentScrollTop > lastScrollTop) {
@@ -45,3 +45,48 @@ window.addEventListener('scroll', function () {
     // Save current scroll position for the next scroll event
     lastScrollTop = currentScrollTop;
 });
+// =========================
+// NIGHT MODE TOGGLE
+// =========================
+
+// Get the night mode button
+const nightModeBtn = document.getElementById("night-mode-toggle");
+
+// Add click event to toggle night mode
+nightModeBtn.addEventListener("click", function () {
+    // Toggle class on body
+    document.body.classList.toggle("night-mode");
+
+    // Optional: change button text
+    if (document.body.classList.contains("night-mode")) {
+        nightModeBtn.textContent = "AM Mode";
+    } else {
+        nightModeBtn.textContent = "PM Mode";
+    }
+});
+// =========================
+// MUSIC TOGGLE
+// =========================
+
+// Get the music button and audio element
+const musicToggleBtn = document.getElementById("musicToggleBtn");
+const bgMusic = document.getElementById("bgMusic");
+
+// Check both elements exist before running
+if (musicToggleBtn && bgMusic) {
+    musicToggleBtn.addEventListener("click", function () {
+        // If music is paused, play it
+        if (bgMusic.paused) {
+            bgMusic.play();
+            musicToggleBtn.textContent = "Music: ON";
+            musicToggleBtn.classList.remove("music-off");
+            musicToggleBtn.classList.add("music-on");
+        } else {
+            // If music is already playing, pause it
+            bgMusic.pause();
+            musicToggleBtn.textContent = "Music: OFF";
+            musicToggleBtn.classList.remove("music-on");
+            musicToggleBtn.classList.add("music-off");
+        }
+    });
+}
