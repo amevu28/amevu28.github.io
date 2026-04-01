@@ -1,45 +1,47 @@
-
-// Biến để lưu vị trí cuộn chuột trước đó (bắt đầu là 0)
+// Store the previous scroll position
 let lastScrollTop = 0;
 
-window.onscroll = function() {
-    // 1. Lấy đối tượng con mèo và kiểm tra xem nó có tồn tại không
+// Move and flip the pixel cat based on scroll direction
+window.addEventListener('scroll', function () {
+    // Get the cat element
     const pixelCat = document.getElementById('pixel-cat');
+
+    // Stop if the cat element is missing
     if (!pixelCat) return;
 
-    // 2. Tính toán vị trí cuộn hiện tại (hỗ trợ cả các trình duyệt cũ)
-    let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    // Get the current vertical scroll position
+    const currentScrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
 
-    // 3. Tính toán tỷ lệ phần trăm và quãng đường di chuyển (như cũ)
-    let totalScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-    
-    // Kiểm tra nếu trang có thể cuộn được (tránh lỗi chia cho 0)
-    if (totalScrollableHeight > 0) {
-        let scrollPercentage = currentScrollTop / totalScrollableHeight;
-        let maxTravelDistance = window.innerWidth - pixelCat.offsetWidth;
-        let currentMoveDistance = scrollPercentage * maxTravelDistance;
+    // Calculate total scrollable height
+    const totalScrollableHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
 
-        // --- BẮT ĐẦU PHẦN CODE MỚI ĐỂ XOAY MÈO ---
+    // Prevent division by zero
+    if (totalScrollableHeight <= 0) return;
 
-        let scaleX = 1; // Mặc định là nhìn sang trái (giả sử ảnh gốc nhìn sang trái)
+    // Calculate scroll progress across the page
+    const scrollPercentage = currentScrollTop / totalScrollableHeight;
 
-        if (currentScrollTop > lastScrollTop) {
-            // Đang cuộn XUỐNG (Forward) -> Mèo đi sang trái
-            // Giữ nguyên hướng gốc, hoặc đặt scaleX = 1
-            scaleX = 1; 
-        } else {
-            // Đang cuộn LÊN (Backward) -> Mèo đi sang phải
-            // Lật ngược hình ảnh bằng scaleX = -1
-            scaleX = -1;
-        }
+    // Calculate how far the cat should move horizontally
+    const maxTravelDistance = window.innerWidth - pixelCat.offsetWidth;
+    const currentMoveDistance = scrollPercentage * maxTravelDistance;
 
-        // --- ÁP DỤNG CẢ DI CHUYỂN VÀ XOAY ---
-        // Chúng ta kết hợp translateX() để di chuyển và scaleX() để xoay
-        pixelCat.style.transform = `translateX(-${currentMoveDistance}px) scaleX(${scaleX})`;
+    // Determine cat direction based on scroll direction
+    let scaleX = 1;
 
-        // Cập nhật lại vị trí cuộn cuối cùng để dùng cho lần sau
-        lastScrollTop = currentScrollTop;
+    if (currentScrollTop > lastScrollTop) {
+        // Scrolling down: keep original direction
+        scaleX = 1;
+    } else {
+        // Scrolling up: flip the cat horizontally
+        scaleX = -1;
     }
-}
 
+    // Apply movement and direction flip
+    pixelCat.style.transform =
+        `translateX(-${currentMoveDistance}px) scaleX(${scaleX})`;
 
+    // Save current scroll position for the next scroll event
+    lastScrollTop = currentScrollTop;
+});

@@ -1,25 +1,30 @@
- @font-face {
+/* =========================
+   font setup
+   ========================= */
+@font-face {
   font-family: 'Humane';
   src: url('fonts/1589_Humane_BordeauxW00-It.ttf') format('truetype');
   font-weight: normal;
 }
 
- @font-face {
+@font-face {
   font-family: 'Pixelify';
   src: url('fonts/PixelifySans-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
 }
 
+/* =========================
+   general web layout
+   ========================= */
 html {
-  height: 1100px;
-  z-index: -9000;
-  
+  min-height: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100%;
+  color: #333333;
   background: linear-gradient(
     to bottom,
     #FFBCE4 0%,
@@ -29,23 +34,27 @@ body {
   );
   background-attachment: fixed;
   background-repeat: no-repeat;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* =========================
+   main layout
+   ========================= */
 .scroll-container {
   display: flex;
-  align-items: flex-start; 
+  align-items: flex-start;
   padding: 0 10%;
 }
 
 .static-part {
-  font-family: 'Pixelify';
-  font-size: 140px;
-  font-weight: 120px;
   position: sticky;
+  top: 45vh;
   margin-left: 235px;
-  top: 45vh; /* Giữ số 00 ở vị trí 30% màn hình từ trên xuống */
+  font-family: 'Pixelify', sans-serif;
+  font-size: 140px;
+  font-weight: 120;
   line-height: 1;
-  color:#878787;
+  color: #878787;
 }
 
 .dynamic-wrapper {
@@ -53,306 +62,239 @@ body {
 }
 
 .question {
-  height: 140vh; /* Mỗi mốc thời gian chiếm 1 màn hình */
   display: flex;
   align-items: center;
+  height: 140vh;
 }
 
 .number {
-  font-family: 'Pixelify';
-  font-size: 136px;
-  font-weight: 120px;
   margin-right: 40px;
- color:#585858
+  font-family: 'Pixelify', sans-serif;
+  font-size: 136px;
+  font-weight: 120;
+  color: #585858;
 }
 
 .content {
-  max-width: 400px;
+  position: relative;
+  width: fit-content;
+  max-width: fit-content;
   margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* Tùy chỉnh cho phần nội dung văn bản */
+/* =========================
+   text style
+   ========================= */
 .content p.question-text {
+  position: absolute;
+  top: 50%;
+  margin: 0;
   font-family: 'Pixelify', sans-serif;
   font-weight: 50;
   font-size: 2rem;
   line-height: 1.2;
-  margin-bottom: 10px;
-
+  transform: translateY(-50%);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.content p {
+.content p.answer-text {
+  width: 570px;
+  margin: 0;
+  padding: 20px;
   font-family: 'Humane', sans-serif;
   font-weight: 400;
   font-size: 28px;
+  line-height: 1.2;
   color: #424242;
-  line-height: 1.2;
-  width: 570px;
-  padding: 20px;
-  line-height: 1.2;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
 }
+
+/* =========================
+   hover interaction
+   ========================= */
+.question .content:hover .question-text {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-70%);
+}
+
+.question .content:hover .answer-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================
+   decorative images
+   ========================= */
 .pixel-cat-overlay {
-    position: fixed; /* Giữ chú mèo cố định trên màn hình */
-    bottom: 30px;    /* Cách đáy màn hình 30px */
-    right: 30px;     /* Cách lề phải màn hình 30px */
-    
-    width: 250px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
-    height: auto;
-    
-    /* Rất quan trọng cho pixel art: giúp ảnh không bị mờ */
-    image-rendering: pixelated; 
-    /* Đảm bảo chú mèo nằm trên cùng */
-    z-index: 10000; 
-    /* Nếu bạn muốn mèo không cản trở việc click vào các nút bên dưới */
-    pointer-events: none; 
-    opacity: 100
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: 250px;
+  height: auto;
+  image-rendering: pixelated;
+  z-index: 10000;
+  opacity: 1;
+  pointer-events: none;
 }
 
 .corner-heart {
-    position: fixed;
-    width: 754px;
-    opacity: 0.3;
-    left: -1px;
-    z-index: -1000;
+  position: fixed;
+  top: 0;
+  left: -3px;
+  width: 754px;
+  opacity: 0.3;
+  z-index: 10;
+  pointer-events: none;
 }
+
 .left-below-heart {
-    position: fixed;
-    width: 200px;
-    opacity: 0.3;
-    left: -1px;
-    bottom: 5px;
-    z-index: -1000;
+  position: fixed;
+  left: -1px;
+  bottom: 5px;
+  width: 200px;
+  opacity: 0.3;
+  z-index: -1000;
+  pointer-events: none;
 }
+
 .right-below-heart {
-    position: fixed;
-    width: 200px;
-    opacity: 0.3;
-    right: 0px;
-    bottom: 5px;
-    z-index: -1000;
-    transform: scaleX(-1);
+  position: fixed;
+  right: 0;
+  bottom: 5px;
+  width: 200px;
+  opacity: 0.3;
+  z-index: -1000;
+  transform: scaleX(-1);
+  pointer-events: none;
 }
 
-/* --- HIỆU ỨNG HOVER TRÁO ĐỔI VỊ TRÍ CÂU HỎI & CÂU TRẢ LỜI --- */
-
-/* 1. Ép thẻ content thành một khung lưới duy nhất */
-.question .content {
-    display: inline-grid;
-    grid-template-areas: "overlap"; /* Tạo một vùng đè mang tên overlap */
-    width: fit;
-}
-
-/* 2. Bắt cả câu hỏi và câu trả lời phải đứng chung một chỗ */
-.question .content .question-text,
-.question .content .answer-text {
-    grid-area: overlap; /* Nằm chung trên vùng overlap */
-    margin: 0;          /* Xóa bỏ khoảng cách thừa để không bị lệch */
-    transition: opacity 0.4s ease, transform 0.4s ease; /* Tạo hiệu ứng mượt */
-}
-
-/* --- TRẠNG THÁI MẶC ĐỊNH (Khi chưa hover) --- */
-
-/* --- HIỆU ỨNG CĂN GIỮA TUYỆT ĐỐI THEO CHIỀU CAO CÂU TRẢ LỜI --- */
-
-/* 1. Thiết lập cái hộp content thành Flexbox để căn giữa */
-.question .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Căn giữa nội dung theo chiều dọc */
-    align-items: flex-start;
-    
-    position: relative;
-    width: fit-content;
-    max-width: fit-content;
-}
-
-/* 2. Ép Câu hỏi nằm đè lên đúng tâm của Câu trả lời */
-.question .content .question-text {
-    position: absolute; /* Rút câu hỏi ra khỏi dòng chảy bình thường */
-    top: 50%;           /* Đẩy xuống giữa */
-    transform: translateY(-50%); /* Giật ngược lại nửa chiều cao để vào tâm chuẩn */
-    margin: 0;
-    
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-/* 3. Câu trả lời đóng vai trò làm khung sườn (Dùng để lấy chiều cao) */
-.question .content .answer-text {
-    opacity: 0;
-    visibility: hidden;
-    margin: 0;
-    
-    /* pointer-events giúp chuột đi xuyên qua câu trả lời để chạm vào câu hỏi */
-    pointer-events: none; 
-    
-    transition: opacity 0.4s ease;
-}
-
-/* --- TRẠNG THÁI KHI HOVER (Chạm vào đúng khối chữ) --- */
-
-/* Khi hover: Câu hỏi ẩn đi và nhích nhẹ lên trên */
-.question .content:hover .question-text {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-70%); /* Bay nhẹ lên trên lúc ẩn */
-}
-
-/* Khi hover: Câu trả lời hiện lên rực rỡ ở đúng vị trí khung sườn */
-.question .content:hover .answer-text {
-    opacity: 1;
-    visibility: visible;
-}
-/* --- CODE ĐỒNG HỒ ĐỘC LẬP --- */
-
+/* =========================
+   decorative clock
+   ========================= */
 .standalone-clock {
-    /* 1. ĐỊNH VỊ: Bạn tùy ý chỉnh 2 số này để đặt đồng hồ vào góc bạn muốn */
-    position: fixed;
-    top: 20%;   
-    left: 6%;  
-
-    /* 2. KÍCH THƯỚC: Thu nhỏ hoặc phóng to vùng đốm sáng ở đây */
-    width: 300px;
-    height: 300px;
-
-    /* 3. TẠO ĐỐM SÁNG XANH LÁ (Radial Gradient) */
-    background: radial-gradient(
-        circle, 
-        rgba(100, 242, 140, 0.7) 0%,   /* Xanh lá ở tâm */
-        rgba(255, 255, 255, 0) 50%,  
-        transparent 75%                
-    );
-    border-radius: 90%;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 5; /* Đảm bảo nổi trên nền hạt lấp lánh nhưng dưới chữ */
+  position: fixed;
+  top: 20%;
+  left: 6%;
+  width: 300px;
+  height: 300px;
+  border-radius: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(
+    circle,
+    rgba(100, 242, 140, 0.7) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    transparent 75%
+  );
+  z-index: 5;
 }
 
-/* --- TẠO HAI CHIẾC KIM ĐỒNG HỒ TỰ QUAY --- */
 .clock-hands {
-    position: relative;
-    width: 0;
-    height: 0;
+  position: relative;
+  width: 0;
+  height: 0;
 }
 
-/* Khởi tạo trục xoay cho cả 2 kim */
 .clock-hands::before,
 .clock-hands::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform-origin: bottom center; /* Quay từ gốc chân kim */
-    border-radius: 4px;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
 }
 
-/* KIM PHÚT (Màu hồng pixel, dài hơn, quay nhanh hơn) */
 .clock-hands::before {
-    width: 3px;
-    height: 70px; /* Chiều dài kim */
-    background-color: #ffc9ef;
-    box-shadow: 0 0 8px #f6eef3; /* Phát sáng neon */
-    
-    margin-left: -1.5px;
-    margin-top: -70px; /* Kéo ngược lên trên trục */
-    
-    animation: clockSpin 10s linear infinite; /* Quay hết 1 vòng trong 10 giây */
+  width: 3px;
+  height: 70px;
+  margin-left: -1.5px;
+  margin-top: -70px;
+  background-color: #ffc9ef;
+  box-shadow: 0 0 8px #f6eef3;
+  animation: clockSpin 10s linear infinite;
 }
 
-/* KIM GIỜ (Màu trắng, ngắn hơn, quay chậm hơn) */
 .clock-hands::after {
-    width: 4px;
-    height: 45px; /* Chiều dài kim */
-    background-color: #ffffff;
-    box-shadow: 0 0 8px #ffffff;
-    
-    margin-left: -2px;
-    margin-top: -45px;
-    
-    animation: clockSpin 60s linear infinite; /* Quay hết 1 vòng trong 60 giây */
+  width: 4px;
+  height: 45px;
+  margin-left: -2px;
+  margin-top: -45px;
+  background-color: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  animation: clockSpin 60s linear infinite;
 }
 
-/* HIỆU ỨNG XOAY TRÒN BẤT TẬN */
 @keyframes clockSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-/* --- NÚT BẬT/TẮT NHẠC STYLE PIXEL --- */
-
-.pixel-music-btn {
-    /* ĐỊNH VỊ: Bạn tự chỉnh lại top và right để nó nằm cạnh nút Night Mode nhé */
-    position: fixed;
-    top: 20px; 
-    right: 150px; /* Nhích sang trái một chút để không đè lên nút Night Mode */
-    z-index: 100;
-
-    /* STYLE GIỐNG NÚT NIGHT MODE CỦA BẠN */
-    font-family: 'Pixelify';
-    font-size: 16px;
-    padding: 10px 18px;
-    background-color: #e8e8e8; /* Màu xám nhạt */
-    color: #000000;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    
-    cursor: pointer;
-    width: fit-content;
-    display: inline-block;
-    
-    transition: all 0.2s ease;
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-.pixel-music-btn:hover {
-    background-color: #c2ffb9;
-}
-
-/* Hiệu ứng trực quan khi bật/tắt */
-.music-off {
-    border: 1px solid #462f2f; /* Viền đỏ nhẹ báo hiệu đang tắt */
-    color: #000000;
-}
-
-.music-on {
-    border: 1px solid #61ffa3; /* Viền xanh lá báo hiệu đang bật */
-    color: #2ecc71;
-}
-
-/* --- STYLE MẶC ĐỊNH (PM MODE - CHẾ ĐỘ SÁNG) --- */
-body {
-    background-color: #ffffff; /* Nền trắng ma mặc định */
-    color: #333333; /* Chữ tối */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-family: 'PixelifySans-VariableFont_wght', monospace;
-}
-
-/* NÚT BẤM STYLE PIXEL CHUẨN (MÔ PHỎNG NÚT CŨ CỦA BẠN) */
+/* =========================
+   buttons
+   ========================= */
 .pixel-mode-btn {
-    position: fixed;
-    top: 20px; /* Cách mép trên 20px */
-    right: 20px; /* Cách mép phải 20px */
-    z-index: 1000;
-
-    /* Style pixel art giống hệt nút cũ của bạn */
-    font-family: 'Pixelify';
-    font-size: 16px;
-    padding: 10px 18px;
-    background-color: #f0f0f0;
-    color: #000000;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    
-    cursor: pointer;
-    width: fit-content;
-    display: inline-block;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: inline-block;
+  width: fit-content;
+  padding: 10px 18px;
+  font-family: 'Pixelify', sans-serif;
+  font-size: 16px;
+  color: #000000;
+  background-color: #f0f0f0;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
 }
 
 .pixel-mode-btn:hover {
-    background-color: #c2ffb9;
-
+  background-color: #c2ffb9;
 }
 
+.pixel-music-btn {
+  position: fixed;
+  top: 20px;
+  right: 150px;
+  z-index: 100;
+  display: inline-block;
+  width: fit-content;
+  padding: 10px 18px;
+  font-family: 'Pixelify', sans-serif;
+  font-size: 16px;
+  color: #000000;
+  background-color: #e8e8e8;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pixel-music-btn:hover {
+  background-color: #c2ffb9;
+}
+
+.music-off {
+  border: 1px solid #462f2f;
+  color: #000000;
+}
+
+.music-on {
+  border: 1px solid #61ffa3;
+  color: #2ecc71;
+}
