@@ -40,22 +40,17 @@ window.onscroll = function() {
         // Cập nhật lại vị trí cuộn cuối cùng để dùng cho lần sau
         lastScrollTop = currentScrollTop;
     }
-
-    
-    // --- Đoạn code bổ sung lắng nghe nút bấm Night Mode ---
+};
 const nightModeBtn = document.getElementById('night-mode-toggle');
 if (nightModeBtn) {
     nightModeBtn.addEventListener('click', function() {
-        // Thêm hoặc xóa class night-mode ở thẻ body
         document.body.classList.toggle('night-mode');
         
-        // Đổi chữ trên nút bấm cho hợp hoàn cảnh
         if (document.body.classList.contains('night-mode')) {
-            this.textContent = 'AM Mode';
+            this.textContent = 'Light Mode';
         } else {
-            this.textContent = 'PM Mode';
+            this.textContent = 'Night Mode';
         }
     });
 }
 
-};

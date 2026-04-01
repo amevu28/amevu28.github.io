@@ -96,7 +96,7 @@ body {
     bottom: 30px;    /* Cách đáy màn hình 30px */
     right: 30px;     /* Cách lề phải màn hình 30px */
     
-    width: 230px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
+    width: 250px;    /* Bạn có thể điều chỉnh độ lớn nhỏ ở đây */
     height: auto;
     
     /* Rất quan trọng cho pixel art: giúp ảnh không bị mờ */
@@ -232,8 +232,8 @@ body.night-mode .static-part {
 .standalone-clock {
     /* 1. ĐỊNH VỊ: Bạn tùy ý chỉnh 2 số này để đặt đồng hồ vào góc bạn muốn */
     position: fixed;
-    top: 20%;  
-    left: 5%;  
+    top: 20%;   
+    left: 6%;  
 
     /* 2. KÍCH THƯỚC: Thu nhỏ hoặc phóng to vùng đốm sáng ở đây */
     width: 300px;
@@ -302,4 +302,43 @@ body.night-mode .static-part {
 @keyframes clockSpin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+/* --- NÚT BẬT/TẮT NHẠC STYLE PIXEL --- */
+
+.pixel-music-btn {
+    /* ĐỊNH VỊ: Bạn tự chỉnh lại top và right để nó nằm cạnh nút Night Mode nhé */
+    position: fixed;
+    top: 20px; 
+    right: 150px; /* Nhích sang trái một chút để không đè lên nút Night Mode */
+    z-index: 100;
+
+    /* STYLE GIỐNG NÚT NIGHT MODE CỦA BẠN */
+    font-family: 'Pixelify';
+    font-size: 16px;
+    padding: 10px 18px;
+    background-color: #e8e8e8; /* Màu xám nhạt */
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    
+    cursor: pointer;
+    width: fit-content;
+    display: inline-block;
+    
+    transition: all 0.2s ease;
+}
+
+.pixel-music-btn:hover {
+    background-color: #c2ffb9;
+}
+
+/* Hiệu ứng trực quan khi bật/tắt */
+.music-off {
+    border: 1px solid #462f2f; /* Viền đỏ nhẹ báo hiệu đang tắt */
+    color: #000000;
+}
+
+.music-on {
+    border: 1px solid #61ffa3; /* Viền xanh lá báo hiệu đang bật */
+    color: #2ecc71;
 }
