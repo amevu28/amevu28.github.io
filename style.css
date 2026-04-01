@@ -133,29 +133,6 @@ body {
     transform: scaleX(-1);
 }
 
-/* --- Đoạn code bổ sung cho Night Mode (Có Gradient Tối) --- */
-body.night-mode {
-    /* Đổi dải màu gradient thành các tông đen/xám tối */
-    background: linear-gradient(
-        to bottom,
-        #474647 0%,    /* Màu xám đậm ở đỉnh (thay cho #FFBCE4) */
-        #141414 20%,   /* Màu đen tuyền ở giữa (thay cho #FFFFFF) */
-        #351c1c 75%,   /* Giữ màu đen tuyền (thay cho #FFFFFF) */
-        #474647 100%   /* Màu xám đậm ở đáy (thay cho #FFBCE4) */
-    ) !important;
-    
-    background-attachment: fixed !important; /* Giữ cố định nền như cũ */
-    color: #ffa2c1 !important;              /* Chữ màu hồng */
-}
-
-/* Ép tất cả các chữ trong khung chữ nhảy sang màu hồng */
-body.night-mode p, 
-body.night-mode span, 
-body.night-mode div,
-body.night-mode .static-part {
-    color: #ffa8c5 !important;
-}
-
 /* --- HIỆU ỨNG HOVER TRÁO ĐỔI VỊ TRÍ CÂU HỎI & CÂU TRẢ LỜI --- */
 
 /* 1. Ép thẻ content thành một khung lưới duy nhất */
@@ -342,3 +319,40 @@ body.night-mode .static-part {
     border: 1px solid #61ffa3; /* Viền xanh lá báo hiệu đang bật */
     color: #2ecc71;
 }
+
+/* --- STYLE MẶC ĐỊNH (PM MODE - CHẾ ĐỘ SÁNG) --- */
+body {
+    background-color: #ffffff; /* Nền trắng ma mặc định */
+    color: #333333; /* Chữ tối */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'PixelifySans-VariableFont_wght', monospace;
+}
+
+/* NÚT BẤM STYLE PIXEL CHUẨN (MÔ PHỎNG NÚT CŨ CỦA BẠN) */
+.pixel-mode-btn {
+    position: fixed;
+    top: 20px; /* Cách mép trên 20px */
+    right: 20px; /* Cách mép phải 20px */
+    z-index: 1000;
+
+    /* Style pixel art giống hệt nút cũ của bạn */
+    font-family: 'Pixelify';
+    font-size: 16px;
+    padding: 10px 18px;
+    background-color: #f0f0f0;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    
+    cursor: pointer;
+    width: fit-content;
+    display: inline-block;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.pixel-mode-btn:hover {
+    background-color: #c2ffb9;
+
+}
+

@@ -40,17 +40,6 @@ window.onscroll = function() {
         // Cập nhật lại vị trí cuộn cuối cùng để dùng cho lần sau
         lastScrollTop = currentScrollTop;
     }
-};
-const nightModeBtn = document.getElementById('night-mode-toggle');
-if (nightModeBtn) {
-    nightModeBtn.addEventListener('click', function() {
-        document.body.classList.toggle('night-mode');
-        
-        if (document.body.classList.contains('night-mode')) {
-            this.textContent = 'Light Mode';
-        } else {
-            this.textContent = 'Night Mode';
-        }
-    });
 }
+
 
