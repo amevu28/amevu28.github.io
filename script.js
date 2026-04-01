@@ -75,14 +75,14 @@ const bgMusic = document.getElementById("bgMusic");
 // Check both elements exist before running
 if (musicToggleBtn && bgMusic) {
     musicToggleBtn.addEventListener("click", function () {
-        // If music is paused, play it
+        // If music is paused, play.
         if (bgMusic.paused) {
             bgMusic.play();
             musicToggleBtn.textContent = "Music: ON";
             musicToggleBtn.classList.remove("music-off");
             musicToggleBtn.classList.add("music-on");
         } else {
-            // If music is already playing, pause it
+            // If music is already playing, pause.
             bgMusic.pause();
             musicToggleBtn.textContent = "Music: OFF";
             musicToggleBtn.classList.remove("music-on");
@@ -90,3 +90,70 @@ if (musicToggleBtn && bgMusic) {
         }
     });
 }
+const canvas = document.getElementById("blob-canvas");
+const ctx = canvas.getContext("2d");
+
+let blobs = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function createBlobs() {
+  blobs = [];
+
+  for (let i = 0; i < 50; i++) {
+    blobs.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 38 + 5, 
+      alpha: Math.random() * 0.12 + 0.03,
+      speedX: (Math.random() - 0.5) * 1.2, 
+      speedY: (Math.random() - 0.5) * 1.2
+    });
+  }
+}
+
+function drawBlob(blob) {
+  const gradient = ctx.createRadialGradient(
+    blob.x, blob.y, 0,
+    blob.x, blob.y, blob.radius
+  );
+
+  gradient.addColorStop(0, `rgba(0, 0, 0, ${blob.alpha})`);
+  gradient.addColorStop(0.1, `rgba(0, 0, 0, ${blob.alpha * 0.4})`);
+  gradient.addColorStop(1, `rgba(195, 241, 209, 0.98)`);
+
+  ctx.beginPath();
+  ctx.fillStyle = gradient;
+  ctx.arc(blob.x, blob.y, blob.radius, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function animateBlobs() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  blobs.forEach(blob => {
+    blob.x += blob.speedX;
+    blob.y += blob.speedY;
+
+    if (blob.x < -20) blob.x = canvas.width + 20;
+    if (blob.x > canvas.width + 20) blob.x = -20;
+    if (blob.y < -20) blob.y = canvas.height + 20;
+    if (blob.y > canvas.height + 20) blob.y = -20;
+
+    drawBlob(blob);
+  });
+
+  requestAnimationFrame(animateBlobs);
+}
+
+resizeCanvas();
+createBlobs();
+animateBlobs();
+
+window.addEventListener("resize", () => {
+  resizeCanvas();
+  createBlobs();
+});
