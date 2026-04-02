@@ -244,7 +244,7 @@ to mimic a real clock motion.
 }
 
 /* =========================
-   buttons: i made 2 buttons in my website, one is for the AM/PM mode and the other is for the 
+   BUTTONS: i made 2 buttons in my website, one is for the AM/PM mode and the other is for the
    music. when the user hover over them, the blackground changes to green indicating that they are interactive.
    ========================= */
 .pixel-mode-btn {
@@ -281,7 +281,7 @@ to mimic a real clock motion.
   font-family: 'Pixelify', sans-serif;
   font-size: 16px;
   color: #000000;
-  background-color: #e8e8e8;
+  background-color: #f0f0f0;
   border: 1px solid #000000;
   border-radius: 4px;
   cursor: pointer;
@@ -302,7 +302,7 @@ to mimic a real clock motion.
   color: #2ecc71;
 }
 /* =========================
-   P.M MODE
+   P.M MODE LAYOUT
    ========================= */
 
 /* during P.M mode, the back ground changes to grey-black gradient*/
