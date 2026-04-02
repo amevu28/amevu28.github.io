@@ -351,11 +351,14 @@ body.night-mode .standalone-clock {
   z-index: -1;
   background: transparent;
 }
+/* =========================
+   link to the richard mille website
+   ========================= */
 .rm-link {
   font-family: 'Pixelify', serif;
   font-size: 20px;
   position: fixed;
-  top: 500px;
+  top: 600px;
   left: 140px;
   color: #faadda;
   z-index: 9999;
