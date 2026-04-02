@@ -14,7 +14,8 @@
 }
 
 /* =========================
-   general web layout
+   general web layout: my website layout is mainly based on four colours — pink, green, white, and grey.
+   the background is coded as fixed so it stays unchanged throughout the experience.
    ========================= */
 html {
   min-height: 100%;
@@ -38,7 +39,8 @@ body {
 }
 
 /* =========================
-   main layout
+   here is the the code i use to display the content of the 13 questions, i aimed to recreat the look of the digital clock 
+   so there is a fixed left-side number and the question and answer sections scroll together on the right.
    ========================= */
 .scroll-container {
   display: flex;
@@ -86,9 +88,6 @@ body {
   align-items: flex-start;
 }
 
-/* =========================
-   text style
-   ========================= */
 .content p.question-text {
   position: absolute;
   top: 50%;
@@ -179,7 +178,10 @@ body {
 }
 
 /* =========================
-   decorative clock
+   decorative clock: i used rotation animation to create a clock running real time. 
+the two clocks hands are made using pseudo elements and rotate continuously
+but at different speeds. i made one hand faster (10 seconds) and one slower (60 seconds) 
+to mimic a real clock motion. 
    ========================= */
 .standalone-clock {
   position: fixed;
@@ -242,7 +244,8 @@ body {
 }
 
 /* =========================
-   buttons
+   buttons: i made 2 buttons in my website, one is for the AM/PM mode and the other is for the 
+   music. when the user hover over them, the blackground changes to green indicating that they are interactive.
    ========================= */
 .pixel-mode-btn {
   position: fixed;
@@ -299,10 +302,10 @@ body {
   color: #2ecc71;
 }
 /* =========================
-   NIGHT MODE (DARK MODE)
+   P.M MODE
    ========================= */
 
-/* Dark background + light text */
+/* during P.M mode, the back ground changes to grey-black gradient*/
 body.night-mode {
     background: linear-gradient(
         to bottom,
@@ -313,20 +316,20 @@ body.night-mode {
     color: #ffa0d9;
 }
 
-/* Text color adjustments */
+/* Text color change to pink in p.m mode */
 body.night-mode .content p.answer-text {
     color: #ffa0d9;
 }
 
 body.night-mode .number {
-    color: #939191;
+    color: #9d9b9b;
 }
 
 body.night-mode .static-part {
     color: #666666;
 }
 
-/* Optional: glow effect */
+/* clock glow effect */
 body.night-mode .standalone-clock {
     background: radial-gradient(
         circle,
@@ -334,6 +337,10 @@ body.night-mode .standalone-clock {
         transparent 70%
     );
 }
+/* =========================
+   blob effects
+   ========================= */
+
 #blob-canvas {
   position: fixed;
   top: 0;
@@ -349,7 +356,7 @@ body.night-mode .standalone-clock {
   font-size: 20px;
   position: fixed;
   top: 500px;
-  left: 145px;
+  left: 140px;
   color: #faadda;
   z-index: 9999;
 }
