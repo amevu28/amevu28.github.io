@@ -178,7 +178,7 @@ body {
 }
 
 /* =========================
-   decorative clock: i used rotation animation to create a clock running real time. 
+   decorative clock: i used rotation animation to create a clock running animation. 
 the two clocks hands are made using pseudo elements and rotate continuously
 but at different speeds. i made one hand faster (10 seconds) and one slower (60 seconds) 
 to mimic a real clock motion. 
@@ -352,7 +352,7 @@ body.night-mode .standalone-clock {
   background: transparent;
 }
 /* =========================
-   link to the richard mille website
+   link to the richard mille original project website
    ========================= */
 .rm-link {
   font-family: 'Pixelify', serif;
