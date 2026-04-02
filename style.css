@@ -118,7 +118,7 @@ body {
 }
 
 /* =========================
-   hover interaction
+   hover interaction: when the user hover over the question text, it will fade out and move up, while the answer text will fade in and become visible.
    ========================= */
 .question .content:hover .question-text {
   opacity: 0;
@@ -132,7 +132,7 @@ body {
 }
 
 /* =========================
-   decorative images
+   decorative images: i added some pixelate elements i made in Adobe Illustrator as decorative elements to enhance the visual appeal of the website, as well as match the pixel style of the digital watch since Richard Mille is a watch brand.
    ========================= */
 .pixel-cat-overlay {
   position: fixed;
