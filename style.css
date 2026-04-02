@@ -344,3 +344,12 @@ body.night-mode .standalone-clock {
   z-index: -1;
   background: transparent;
 }
+.rm-link {
+  font-family: 'Pixelify', serif;
+  font-size: 20px;
+  position: fixed;
+  top: 500px;
+  left: 145px;
+  color: #faadda;
+  z-index: 9999;
+}
